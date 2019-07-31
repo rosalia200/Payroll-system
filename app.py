@@ -11,7 +11,7 @@ db= SQLAlchemy(app)
 from models.Employees import  EmployeeModel
 from models.Derpartments import DepartmentModel
 
-
+#this decorator helps im
 @app.before_first_request
 def create_tables():
     db.create_all()
