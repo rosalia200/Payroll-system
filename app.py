@@ -15,6 +15,8 @@ from models.Derpartments import DepartmentModel
 @app.before_first_request
 def create_tables():
     db.create_all()
+    print("hello world")
+
 
 #this is a config parameter that shows where oour database lives
 #registering a route
