@@ -1,5 +1,5 @@
 from app import db
-from models.Payrolls import PayrollModel
+#from models.Payrolls import PayrollModel
 
 class EmployeeModel(db.Model):
     __tablename__='employees'
@@ -11,4 +11,4 @@ class EmployeeModel(db.Model):
     department_id=db.Column(db.Integer,db.ForeignKey('departments.department_id'))
     basic_salary=db.Column(db.Float(3))
     benefits=db.Column(db.Float(3))
-    payrolls=db.relationship(PayrollModel,backref='employee')
+    #payrolls=db.relationship(PayrollModel,backref='employee')
