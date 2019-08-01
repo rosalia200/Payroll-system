@@ -5,6 +5,7 @@ class EmployeeModel(db.Model):
     __tablename__='employees'
     id=db.Column(db.Integer,primary_key=True)
     full_name=db.Column(db.String(50),nullable=False)
+    gender = db.Column(db.String(20),nullable=False)
     kra_pin=db.Column(db.String(20),unique=True,nullable=False)
     email=db.Column(db.String(30),unique=True,nullable=True)
     national_id=db.Column(db.String,unique=True,nullable=False)
@@ -12,3 +13,8 @@ class EmployeeModel(db.Model):
     basic_salary=db.Column(db.Float(3))
     benefits=db.Column(db.Float(3))
     #payrolls=db.relationship(PayrollModel,backref='employee')
+
+
+    def insert_to_db(self):
+        db.session.add(self)
+        db.session.commit()
