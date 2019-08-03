@@ -23,4 +23,4 @@ class Production(Config):
     SQLALCHEMY_DATABASE_URI = 'postgres://sdoordsqoodqdj:c3b750b4cbc883970b17dbf365ff7c39b555a63e4f1dc6ecd2ea4827d630d1f3@ec2-54-221-215-228.compute-1.amazonaws.com:5432/dad41oigdlr0lb'
     DEBUG = False
     environment = 'production'
-    
+

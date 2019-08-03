@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from config import Development,Testing
 #instatiating class Flask
 app = Flask(__name__)
-#app.config.from_object(Development)
+app.config.from_object(Development)
 # app.config.from_object(Testing)#comment if you want to develop
 #app.config.from_object(Production)
 
