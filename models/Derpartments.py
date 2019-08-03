@@ -1,4 +1,4 @@
-from app import db
+from main import db
 from models.Employees import EmployeeModel
 #importing sqlalchmey object from main file
 
