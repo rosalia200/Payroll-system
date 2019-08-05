@@ -5,9 +5,9 @@ from config import Development,Testing
 from config import Production
 #instatiating class Flask
 app = Flask(__name__)
-#app.config.from_object(Development)
+app.config.from_object(Development)
 # app.config.from_object(Testing)#comment if you want to develop
-app.config.from_object(Production)
+#app.config.from_object(Production)
 
 db= SQLAlchemy(app)
 from models.Employees import  EmployeeModel
@@ -25,7 +25,9 @@ def create_tables():
 @app.route('/employees/<int:dept_id>')
 def employees(dept_id):
     departments = DepartmentModel.fetch_all()
-    return render_template('employees.html',idara=departments)
+    this_department=DepartmentModel.fetch_by_id(dept_id)
+    employees=this_department.employees
+    return render_template('employees.html',idara=departments,employees=employees)
 
 
 @app.route('/')
@@ -59,11 +61,18 @@ def newEmployee():
     kra_pin = request.form['kra_pin']
     gender = request.form['gender']
     email = request.form['email']
-    department = request.form['department']
+    department = int(request.form['department'])
     basic_salary = request.form['basic_salary']
     benefits = request.form['benefits']
     national_id = request.form['national_id']
+    emp = EmployeeModel(full_name=name_of_employee,gender=gender,kra_pin=kra_pin,email=email,national_id=national_id,department_id=department,basic_salary=basic_salary,benefits=benefits)
 
+
+    emp.insert_to_db()
+    return redirect(url_for('index.html'))
 #run flask
 # if __name__ == '__main__':
 #     app.run()
+@app.route('/payrolls/<int:emp_id>')
+def payrolls(emp_id):
+    return render_template('payroll.html')

@@ -1,7 +1,7 @@
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS=False
     SECRET_KEY = 'some secret'
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:sevani@127.0.0.1:5432/July_payroll'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:sevani@127.0.0.1:5432/July_payroll'  ## dbtype://user:password@host:port/dab_name
     environment = 'development'
     DEBUG = True
 
@@ -11,7 +11,7 @@ class Config:
     DEBUG = False
     environment = 'production'
 class Development(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:sevani@127.0.0.1:5432/July_payroll'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:sevani@127.0.0.1:5432/July_payroll'### dbtype://user:password@host:port/dab_name
     environment='development'
     DEBUG = True
 
