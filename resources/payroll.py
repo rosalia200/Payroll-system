@@ -4,20 +4,20 @@ class Payroll:
     gross_salary=0
     nssf_deductions=0
     taxable_income=0
-
+    personal_relief=1408
     nhif_deductions=0
     payee=0
-
+    overtime=0
     total_deductions=0
     net_salary=0
 
-    def __init__(self, basic_salary, benefits):
+    def __init__(self, basic_salary, benefits,overtime):
         self.basic_salary = basic_salary
         self.benefits = benefits
+        self.overtime=overtime
         self.gross_salary()
         self.nssf_deductions()
         self.taxable_income()
-
         self.nhif_deductions()
         self.payee()
         self.total_deductions()
@@ -89,6 +89,6 @@ class Payroll:
     def total_deductions(self):
         self.total_deductions = self.payee+self.nhif_deductions
     def net_salary(self):
-        self.net_salary= self.taxable_income-self.total_deductions
+        self.net_salary= self.taxable_income-self.total_deductions+self.personal_relief
 
 

@@ -1,5 +1,5 @@
 from main import db
-#from models.Payrolls import PayrollModel
+#from models.Payrolls import PayrollsModel
 
 class EmployeeModel(db.Model):
     __tablename__='employees'
@@ -12,9 +12,44 @@ class EmployeeModel(db.Model):
     department_id=db.Column(db.Integer,db.ForeignKey('departments.department_id'))
     basic_salary=db.Column(db.Float(3))
     benefits=db.Column(db.Float(3))
-    #payrolls=db.relationship(PayrollModel,backref='employee')
+    #payrolls=db.relationship(PayrollsModel,backref='employee')
 
-
+    #create
     def insert_to_db(self):
         db.session.add(self)
         db.session.commit()
+        #read
+    @classmethod
+    def fetch_by_id(cls,id):
+        return cls.query.filter_by(id=id).first()
+    #update
+    @classmethod
+        #read on keyword functions
+    def update_by_id(cls,id,full_name=None,kra_pin=None,email=None,national_id=None,gender=None,basic_salary=None,department_id=None,benefits=None):
+        record= cls.fetch_by_id(id=id)
+        if full_name:
+            record.full_name=full_name
+        if gender:
+            record.gender = gender
+        if kra_pin:
+            record.kra_pin = kra_pin
+        if email:
+            record.email = email
+        if national_id:
+            record.national_id = national_id
+        if department_id:
+            record.department_id = department_id
+        if basic_salary:
+            record.basic_salary = basic_salary
+        if benefits:
+            record.benefits = benefits
+        db.session.commit()
+        return True
+
+    #delete
+    @classmethod
+    def delete_by_id(cls,id):
+        record=cls.query.filter_by(id=id)
+        record.delete()
+        db.session.commit()
+        return True
