@@ -22,6 +22,10 @@ class EmployeeModel(db.Model):
     @classmethod
     def fetch_by_id(cls,id):
         return cls.query.filter_by(id=id).first()
+    @classmethod
+    def fetch_all(cls):
+        return cls.query.all()
+
     #update
     @classmethod
         #read on keyword functions
@@ -43,6 +47,13 @@ class EmployeeModel(db.Model):
             record.basic_salary = basic_salary
         if benefits:
             record.benefits = benefits
+        db.session.commit()
+        return True
+    @classmethod
+    def update_dep_id(cls,id,department_id=None):
+        rec= cls.fetch_by_id(id=id)
+        if department_id:
+            rec.department_id = department_id
         db.session.commit()
         return True
 

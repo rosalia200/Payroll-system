@@ -1,5 +1,5 @@
 # from main import db
-#
+# #from models.Employees import EmployeeModel
 #
 # class PayrollsModel(db.Model):
 #     __tablename__= "payrolls"
@@ -20,3 +20,8 @@
 #     def insert_to_db(self):
 #         db.session.add(self)
 #         db.session.commit()
+#
+#
+#     @classmethod
+#     def fetch_by_employee(cls,id):
+#         return cls.query.filter_by(id=id)

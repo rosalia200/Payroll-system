@@ -24,3 +24,19 @@ class DepartmentModel(db.Model):
     @classmethod
     def fetch_all(cls):
         return cls.query.all()
+    @classmethod
+    def fetch_total_payrol_by_id(cls,department_id):
+        this_dept=cls.fetch_by_id(department_id)
+        total_payroll=0
+        for each_employee in this_dept.employees:
+            total_payroll+=each_employee.basic_salary + each_employee.benefits
+        return total_payroll
+    #update
+    @classmethod
+    def update_by_dept_id(cls,department_id,name=None):
+        dep= cls.fetch_by_id(department_id)
+        if name:
+            dep.name = name
+
+        db.session.commit()
+        return True

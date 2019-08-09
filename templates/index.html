@@ -186,6 +186,50 @@
     <tr>
       <th scope="row">{{ each.department_id }}</th>
       <td>{{ each.name }}</td>
+        <td>   <!-- Button trigger modal for edit employee -->
+
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#editDepartment{{ each.department_id }}">
+                    Edit
+                </button>
+
+                {#    modal for edit department#}
+                <div class="modal fade" id="editDepartment{{ each.department_id }}" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit Department{{ each.name }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form action="/editDepartment/{{ each.department_id }}" method="post">
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput">Department</label>
+                                        <input value="{{ each.name }}" name="name" required type="text"
+                                               class="form-control" id="formGroupExampleInput"
+                                               placeholder="Department">
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <input type="submit" class="form-control btn btn-primary">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        <td><a href="/deleteDepartment/{{ each.department_id }}"><button class="btn btn-danger">Delete</button> </a> </td>#
      <td><a href="/employees/{{ each.department_id }}">View Employees</a> </td>
     </tr>
   {% endfor %}
@@ -193,6 +237,17 @@
 
   </tbody>
 </table>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card"><img class="card-img" height="200px" src="{{ graph | safe }}"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card"><img class="card-img" height="200px" src="{{ bar_graph | safe }}"></div>
+    </div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
