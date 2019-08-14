@@ -40,3 +40,10 @@ class DepartmentModel(db.Model):
 
         db.session.commit()
         return True
+
+    @classmethod
+    def delete_by_dept_id(cls, department_id):
+        record = cls.query.filter_by(department_id=department_id)
+        record.delete()
+        db.session.commit()
+        return True

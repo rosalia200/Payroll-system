@@ -153,9 +153,9 @@ def deleteEmployee(id):
     this_dept = this_emp.department
     EmployeeModel.delete_by_id(id)
     return redirect(url_for('employees',dept_id=this_dept.department_id))
-@app.route('/deleteDepartment/<int:id>')
-def deleteDepartment(id):
-    this_emp = DepartmentModel.fetch_by_id(id=id)
-    this_dept = this_emp.department
-    EmployeeModel.delete_by_id(id)
-    return redirect(url_for('employees',dept_id=this_dept.department_id))
+@app.route('/deleteDepartment/<int:department_id>')
+def deleteDepartment(department_id):
+    this_dept=DepartmentModel.delete_by_dept_id(department_id)
+    employees=EmployeeModel.delete_by_id(id)
+
+    return redirect(url_for('hello_world'))
