@@ -14,7 +14,7 @@ app.config.from_object(Development)
 db= SQLAlchemy(app)
 from models.Employees import  EmployeeModel
 from models.Derpartments import DepartmentModel
-#from models.Payrolls import PayrollsModel
+from models.Payrolls import PayrollsModel
 
 #this decorator helps im
 #TODO:read about flask-migrate
@@ -107,9 +107,36 @@ def newEmployee():
 def payrolls(emp_id):
     employee=EmployeeModel.fetch_by_id(emp_id)
     return render_template('payroll.html',employee=employee)
-# @app.route('/generate_payroll/<int:id>',methods=['POST'])
-# def generate_payroll(id):
-#     this_employee=EmployeeModel.fetch_by_id(id)
+@app.route('/generate_payroll/<int:id>',methods=['POST'])
+def generate_payroll(id):
+    this_employee=EmployeeModel.fetch_by_id(id)
+    overtime = request.form['overtime']
+
+    payroll = Payroll( this_employee.basic_salary, this_employee.benefits, float(overtime))
+
+
+    month = request.form['month']
+    loan = request.form['loan']
+    salary_advance = request.form['salary_advance']
+    gross_salary = payroll.gross_salary
+    taxable_income = payroll.taxable_income
+    nssf = round(payroll.nssf_deductions, 2)
+    paye = round(payroll.payee, 2)
+    personal_relief = payroll.personal_relief
+    #tax_net_off_relief = round(payroll.after_relief, 2)
+    nhif = payroll.nhif_deductions
+    net_salary = round(payroll.net_salary, 2)
+    take_home_pay = net_salary - (float(loan) + float(salary_advance))
+
+    payslip = PayrollsModel( monthYear=month, overtime=overtime, loan_deducted=loan,
+                           salary_advance=salary_advance, gross_salary=gross_salary, nssf=nssf,
+                           taxable_income=taxable_income, paye=paye, personal_relief=personal_relief,
+                            nhif=nhif, net_salary=net_salary,
+                           take_home_pay=take_home_pay, employee_id=this_employee.id)
+    payslip.insert_to_db()
+    flash('Payslip for ' + this_employee.full_name + ' has been successfully generated', 'success')
+    return redirect(url_for('payrolls', emp_id=this_employee.id))
+
 
 @app.route('/editEmployee/<int:id>',methods=['POST'])
 def editEmployee(id):
