@@ -7,14 +7,14 @@ class Payroll:
     personal_relief=1408
     nhif_deductions=0
     payee=0
-    overtime=0
+    #overtime=0
     total_deductions=0
     net_salary=0
 
-    def __init__(self, basic_salary, benefits,overtime):
+    def __init__(self, basic_salary, benefits,):
         self.basic_salary = basic_salary
         self.benefits = benefits
-        self.overtime=overtime
+        #self.overtime=overtime
         self.gross_salary()
         self.nssf_deductions()
         self.taxable_income()

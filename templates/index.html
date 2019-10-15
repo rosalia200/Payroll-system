@@ -111,8 +111,8 @@
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Gender</label>
-                        <select name="gender"  class="form-control" id="formGroupExampleInput"
-                               placeholder="Gender">
+                        <select name="gender" class="form-control" id="formGroupExampleInput"
+                                placeholder="Gender">
                             <option value="na">Not Applicable</option>
                             <option value="f">Female</option>
                             <option value="m">Male</option>
@@ -131,10 +131,10 @@
                     </div>
                     <div class="form-group">
                         <label for="formGroupExampleInput">Choose Department</label>
-                        <select name="department" required  class="form-control" id="formGroupExampleInput"
-                               placeholder="department">
-                             {% for each in idara %}
-                            <option value="{{ each.department_id }}">{{ each.name }}</option>
+                        <select name="department" required class="form-control" id="formGroupExampleInput"
+                                placeholder="department">
+                            {% for each in idara %}
+                                <option value="{{ each.department_id }}">{{ each.name }}</option>
                             {% endfor %}
                         </select>
 
@@ -146,17 +146,19 @@
                                placeholder="National Id">
                         <div class="form-group">
 
-                    </div>
+                        </div>
                         <div class="form-group">
-                        <label for="formGroupExampleInput">Basic Salary</label>
-                        <input name="basic_salary" required type="number" class="form-control" id="formGroupExampleInput"
-                               placeholder="Basic Salary">
-                    </div>
+                            <label for="formGroupExampleInput">Basic Salary</label>
+                            <input name="basic_salary" required type="number" class="form-control"
+                                   id="formGroupExampleInput"
+                                   placeholder="Basic Salary">
+                        </div>
                         <div class="form-group">
-                        <label for="formGroupExampleInput">Benefits</label>
-                        <input name="benefits"  required type="number" class="form-control" id="formGroupExampleInput"
-                               placeholder="Benefits">
-                    </div>
+                            <label for="formGroupExampleInput">Benefits</label>
+                            <input name="benefits" required type="number" class="form-control"
+                                   id="formGroupExampleInput"
+                                   placeholder="Benefits">
+                        </div>
                     </div>
                     <div class="form-group">
 
@@ -173,20 +175,20 @@
 </div>
 {#table#}
 <table class="table">
-  <thead>
+    <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name of Department</th>
-      <th scope="col">Employees</th>
+        <th scope="col">#</th>
+        <th scope="col">Name of Department</th>
+        <th scope="col">Employees</th>
     </tr>
-  </thead>
-  <tbody>
-  {% for each in idara %}
+    </thead>
+    <tbody>
+    {% for each in idara %}
 
-    <tr>
-      <th scope="row">{{ each.department_id }}</th>
-      <td>{{ each.name }}</td>
-        <td>   <!-- Button trigger modal for edit employee -->
+        <tr>
+            <th scope="row">{{ each.department_id }}</th>
+            <td>{{ each.name }}</td>
+            <td>   <!-- Button trigger modal for edit employee -->
 
                 <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#editDepartment{{ each.department_id }}">
@@ -229,13 +231,16 @@
                     </div>
                 </div>
             </td>
-        <td><a href="/deleteDepartment/{{ each.department_id }}"><button class="btn btn-danger">Delete</button> </a> </td>#
-     <td><a href="/employees/{{ each.department_id }}">View Employees</a> </td>
-    </tr>
-  {% endfor %}
+            <td><a href="/deleteDepartment/{{ each.department_id }}">
+                <button class="btn btn-danger">Delete</button>
+            </a></td>
+            #
+            <td><a href="/employees/{{ each.department_id }}">View Employees</a></td>
+        </tr>
+    {% endfor %}
 
 
-  </tbody>
+    </tbody>
 </table>
 
 <div class="row">

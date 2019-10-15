@@ -12,7 +12,7 @@ class EmployeeModel(db.Model):
     department_id=db.Column(db.Integer,db.ForeignKey('departments.department_id'))
     basic_salary=db.Column(db.Float(3))
     benefits=db.Column(db.Float(3))
-    payrolls=db.relationship(PayrollsModel,backref='employee')
+    payrolls=db.relationship('PayrollsModel',backref='wafanyakazi', lazy=True)
 
     #create
     def insert_to_db(self):

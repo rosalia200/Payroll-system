@@ -4,7 +4,8 @@ from main import db
 class PayrollsModel(db.Model):
     __tablename__= "payrolls"
     id=db.Column(db.Integer,primary_key=True)
-    monthYear=db.Column(db.String,unique=True)
+    full_name=db.Column(db.String(50),nullable=False)
+    month=db.Column(db.String,unique=True)
     gross_salary=db.Column(db.Integer)
     nhif=db.Column(db.Float)
     nssf=db.Column(db.Float)
@@ -12,13 +13,13 @@ class PayrollsModel(db.Model):
     loan_deducted=db.Column(db.Float)
     salary_advance=db.Column(db.Float)
     overtime=db.Column(db.Float)
-    persomal_relief=db.Column(db.Float)
+    personal_relief=db.Column(db.Float)
     taxable_income=db.Column(db.Float)
     net_salary=db.Column(db.Float)
     take_home_pay=db.Column(db.Float)
 
     employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'), nullable=False)
-    employee = db.relationship('EmployeeModel',backref=db.backref("payrolls", single_parent=True, lazy=True, cascade='all,delete'))
+    employee = db.relationship('EmployeeModel',backref='pay')
 
     def insert_to_db(self):
         db.session.add(self)
