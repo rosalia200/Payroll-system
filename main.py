@@ -27,13 +27,13 @@ def create_tables():
 #registering a route
 @app.route('/employees/<int:dept_id>')
 def employees(dept_id):
-    departments = DepartmentModel.fetch_all()
+    # departments = DepartmentModel.fetch_all()
 
     this_department=DepartmentModel.fetch_by_id(dept_id)
 
     employees=this_department.employees
 
-    return render_template('employees.html',this_department=this_department,idara=departments)
+    return render_template('employees.html',this_department=this_department)
 
 #fuction to run when clients visit this route
 @app.route('/')
@@ -110,8 +110,10 @@ def newEmployee():
 #     app.run()
 @app.route('/payrolls/<int:emp_id>')
 def payrolls(emp_id):
-    employee=EmployeeModel.fetch_by_id(emp_id)
-    return render_template('payroll.html',employee=employee)
+
+    this_employee=EmployeeModel.fetch_by_id(emp_id)
+    payroll = this_employee.payrolls
+    return render_template('payroll.html',this_employee=this_employee)
 
 
 @app.route('/generate_payroll/<int:id>',methods=['POST'])
@@ -144,8 +146,8 @@ def generate_payroll(id):
         payslip.insert_to_db()
         #payslip.fetch_by_employee(id=id)
         #flash('Payslip for ' + this_employee.full_name + ' has been successfully generated', 'success')
-        return redirect(url_for('payrolls', emp_id=this_employee.id)),render_template('payroll.html')
-
+        #return redirect(url_for('payrolls', emp_id=this_employee.id)),render_template('payroll.html')
+        return redirect(url_for('hello_world'))
 
 @app.route('/editEmployee/<int:id>',methods=['POST'])
 def editEmployee(id):

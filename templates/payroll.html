@@ -32,7 +32,7 @@
             </div>
             <div class="modal-body">
 
-                <form action="/generate_payroll/{{ employee.id }}" method="post">
+                <form action="/generate_payroll/{{ this_employee.id }}" method="post">
                     <div class="form-group">
                         <label for="formGroupExampleInput">Overtime</label>
                         <input name="overtime" value="0" required type="number" class="form-control" id="formGroupExampleInput"
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input name="name" type="hidden" value="{{ employee.full_name }}"  class="form-control">
+                        <input name="name" type="hidden" value="{{ this_employee.full_name }}"  class="form-control">
                     </div>
 
                     <div class="form-group">
@@ -74,31 +74,35 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Name </th>
-      <th scope="col">gender </th>
+      <th scope="col">Month/Year</th>
+      <th scope="col">NHIF</th>
+      <th scope="col">NSSF</th>
 
-      <th scope="col">kra_pin</th>
-      <th scope="col">national_id</th>
-      <th scope="col">email</th>
-      <th scope="col">basic_salary</th>
-      <th scope="col">benefits</th>
-      <th scope="col">payrolls</th>
-    </tr>
+      <th scope="col">Overtime </th>
+      <th scope="col">Loan </th>
+
+      <th scope="col">Salary Advance</th>
+      <th scope="col">Net Salary</th>
+      <th scope="col">Take Home Pay</th>
+
   </thead>
   <tbody>
-  {% for each in employees %}
+  {% for each in this_employee.payrolls %}
 
     <tr>
       <th scope="row">{{ each.id }}</th>
-      <td>{{ each.full_name }}</td>
-      <td>{{ each.gender }}</td>
+      <td>{{ each.month }}</td>
+      <td>{{ each.nhif }}</td>
+      <td>{{ each.nssf }}</td>
 
-      <td>{{ each.kra_pin }}</td>
-      <td>{{ each.email }}</td>
-      <td>{{ each.national_id }}</td>
-      <td>{{ each.basic_salary }}</td>
-      <td>{{ each.benefits }}</td>
-     <td><a href="/payrolls/{{ each.id }}">View Payrolls</a> </td>
+      <td>{{ each.overtime }}</td>
+      <td>{{ each.loan_deducted }}</td>
+
+      <td>{{ each.salary_advance }}</td>
+      <td>{{ each.net_salary }}</td>
+      <td>{{ each.take_home_pay }}</td>
+
+
     </tr>
   {% endfor %}
 
